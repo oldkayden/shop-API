@@ -23,13 +23,18 @@ from django.conf.urls.static import static
 from django.urls import path, include, re_path
 from rest_framework.routers import SimpleRouter
 
-from account.views import UserViewSet
+from category.views import CategoryViewSet
+from order.views import CreateOrderView
+from product.views import ProductViewSet
 
 router = SimpleRouter()
-router.register('accounts', UserViewSet)
+router.register('categories', CategoryViewSet)
+router.register('products', ProductViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/accounts/', include('account.urls')),
+    path('api/v1/orders/', CreateOrderView.as_view()),
     path('api/v1/', include(router.urls)),
 ]
 
